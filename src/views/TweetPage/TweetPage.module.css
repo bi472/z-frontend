@@ -1,0 +1,27 @@
+/* TweetPage.module.css */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.actions{
+    display: flex;
+    gap: 10px;
+}
+
+.page{
+    padding: 24px;
+}
+.button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: medium;
+    color: #007bff;
+}

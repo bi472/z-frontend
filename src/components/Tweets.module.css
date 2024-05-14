@@ -1,0 +1,58 @@
+/* TweetPage.module.css */
+
+.tweetList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tweetItem {
+    margin-bottom: 20px;
+    border: 1px solid #007bff; /* Use brand color for border */
+    border-radius: 8px; /* Slightly larger border radius for a softer look */
+    padding: 15px; /* Increased padding for better spacing */
+    background-color: #ffffff; /* Bright white background for contrast */
+    box-shadow: 0 2px 5px rgba(0, 123, 255, 0.2); /* Soft shadow with brand color */
+    transition: transform 0.2s ease-in-out; /* Smooth transform on hover */
+}
+
+.tweetItem:hover {
+    transform: translateY(-3px); /* Slight raise effect on hover */
+}
+
+.tweetAuthor {
+    font-weight: bold;
+    color: #007bff; /* Brand color for author name */
+}
+
+.tweetDateCreated, .tweetDateUpdated {
+    font-size: 12px;
+    color: #777;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.tweetDateCreated::before {
+    content: '🕒'; /* Icon for creation date */
+    margin-right: 5px;
+    color: #007bff; /* Brand color */
+}
+
+.tweetDateUpdated::before {
+    content: '🔄'; /* Icon for update date */
+    margin-right: 5px;
+    color: #28a745; /* A green color to indicate updates */
+}
+
+.tweetContent {
+    font-size: 16px; /* Maintains readability */
+    color: #333; /* Provides good contrast for readability */
+    background-color: #e9f5ff; /* Light blue background for emphasis, using a lighter shade of your brand color */
+    border: 1px solid #007bff; /* Border with the brand color to frame the content */
+    padding: 10px; /* Ample padding for a good visual separation */
+    border-radius: 5px; /* Rounded corners for a softer look */
+    margin: 10px 0; /* Space between author/date and content */
+    line-height: 1.5; /* Enhanced line spacing for easier reading */
+    box-shadow: 0 2px 5px rgba(0, 123, 255, 0.2); /* Subtle shadow to add depth */
+}
