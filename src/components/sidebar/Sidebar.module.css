@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    border-right: white 0.5px solid;
+    
+}
+
+.logo {
+    height: 70px;
+    align-self: center;
+}
+
+.sidebar {
+    padding-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Выравнивание элементов по левому краю */
+    justify-content: center; /* Центрирование элементов по вертикали */
+    height: 50vh; /* Для демонстрации можете задать высоту контейнера */
+}

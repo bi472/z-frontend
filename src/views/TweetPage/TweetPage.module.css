@@ -1,27 +1,21 @@
-/* TweetPage.module.css */
+.layout {
+    display: grid;
+    grid-template-columns: 275px 1fr 275px;
+    background-color:  #333639;
+}
+
 .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
-.header h1 {
-    color: #007bff;
-    font-weight: bold;
-}
-
-.actions{
+.headerItem {
+    flex-grow: 1;
     display: flex;
-    gap: 10px;
-}
-
-.page{
-    padding: 24px;
-}
-.button {
-    border: none;
-    background: none;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
-    font-size: medium;
-    color: #007bff;
+    padding: 20px;
+    margin-bottom: 10px;
 }
