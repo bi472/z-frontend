@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Tweets.module.css';
-import { Tweet } from '../models/Tweet';
+import { Tweet } from '../../models/Tweet';
 
 interface TweetsProps{
     tweets: Tweet[]

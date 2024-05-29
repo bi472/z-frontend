@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styles from "./AuthForm.module.css";
-import Button from "./Button";
+import Button from "./global/Button";
 import {AuthDTO} from "../types/AuthDto";
 
 interface AuthFormProps {

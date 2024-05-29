@@ -8,9 +8,9 @@ interface SidebarItemProps {
     onClick?: () => void;
 }
 
-const SidebarItem: React.FC<SidebarItemProps> = ({icon: Icon, name}) => {
+const SidebarItem: React.FC<SidebarItemProps> = ({icon: Icon, name, onClick}) => {
     return (
-        <div className={styles.item}>
+        <div className={styles.item} onClick={onClick}>
             <Icon className={styles.icon}/>
             <div className={styles.name}>{name}</div>
         </div>

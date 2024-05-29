@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import TweetPresenter from '../presenters/TweetPresenter';
+import TweetPresenter from '../../presenters/TweetPresenter';
 import styles from './AddTweet.module.css';
-import Button from './Button';
+import Button from '../global/Button';
 
 interface AddTweetProps {
     onTweetAdded: () => void;
@@ -38,10 +38,11 @@ const AddTweet: React.FC<AddTweetProps> = ({ onTweetAdded }) => {
 
     return (
         <div className={styles.tweetFormContainer}>
-        <h2>Add Tweet</h2>
         <form onSubmit={handleSubmit} className={styles.tweetForm}>
             <input className = {styles.inputTweet} type="text" value={tweet} placeholder='Input your tweet here!' onChange={handleInputChange} />
-            <Button>Submit</Button>
+            <div className={styles.buttonContainer}>
+                <Button>Post</Button>
+            </div>
         </form>
     </div>
     );

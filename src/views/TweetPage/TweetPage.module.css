@@ -1,21 +1,28 @@
 .layout {
     display: grid;
     grid-template-columns: 275px 1fr 275px;
-    background-color:  #333639;
+    padding-top: 60px;
 }
 
-.header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+
+.centerSection{
+    grid-column: 2 / 3;
 }
 
-.headerItem {
-    flex-grow: 1;
+.content {
+    border-left: white 1px solid;
+    border-right: white 1px solid;
+}
+
+
+.rightSection{
+    position: fixed;
+    right: 10px;
+    top: 10px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    width: 275px; /* Ширина фиксированной секции */
+    height: 100vh; /* Высота фиксированной секции */
     align-items: center;
-    cursor: pointer;
-    padding: 20px;
-    margin-bottom: 10px;
 }

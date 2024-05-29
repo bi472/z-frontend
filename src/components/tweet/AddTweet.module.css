@@ -1,0 +1,28 @@
+/* AddTweet.css */
+.tweetFormContainer {
+    padding: 10px;
+    margin: 0 0 24px;
+    padding: 20px;
+    border-bottom: white 1px solid;
+}
+
+.tweetForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputTweet {
+    color: white;
+    padding: 10px;
+    margin-bottom: 16px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+.buttonContainer{
+    display: flex;
+    justify-content: flex-end;
+}
+
+

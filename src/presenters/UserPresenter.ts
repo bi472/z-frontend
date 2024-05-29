@@ -3,8 +3,6 @@ import { generateFingerprint } from '../utils/getFingerprint';
 import axios from 'axios';
 import axiosInstance from "../services/AxiosService";
 
-const baseURL = 'http://localhost:5000/auth/';
-
 export class UserPresenter {
 
     public login(authDTO: AuthDTO): Promise<void> {
@@ -15,7 +13,7 @@ export class UserPresenter {
         };
         
         return new Promise((resolve, reject) => {
-            axios.post(baseURL + 'login', data)
+            axiosInstance.post('auth/login', data)
             .then((response) => {
 
                 const accessToken = response.data.access_token;
@@ -47,8 +45,7 @@ export class UserPresenter {
         return new Promise((resolve, reject) => {
             // add barear token to header
             const data = {};
-            console.log(localStorage.getItem('access_token'))
-            axios.post(baseURL + 'logout', data, 
+            axiosInstance.post('auth/logout', data, 
             {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('access_token')}`
@@ -65,7 +62,7 @@ export class UserPresenter {
 
     public me(): Promise<String> {
         return new Promise((resolve, reject) => {
-            axios.get(baseURL + 'me', {
+            axiosInstance.get('auth/me', {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('access_token')}`
                 }

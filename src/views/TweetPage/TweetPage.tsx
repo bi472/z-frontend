@@ -3,10 +3,12 @@ import TweetPresenter from '../../presenters/TweetPresenter'
 import { UserPresenter } from '../../presenters/UserPresenter';
 import { Tweet } from '../../models/Tweet';
 import styles from './TweetPage.module.css'; // Импорт CSS модуля
-import AddTweet from '../../components/AddTweet';
-import { isLoggedIn } from '../../utils/loginCheck';
-import Tweets from '../../components/Tweets';
+import AddTweet from '../../components/tweet/AddTweet';
+import Tweets from '../../components/tweet/Tweets';
 import Sidebar from '../../components/sidebar/Sidebar';
+import Input from '../../components/global/Input';
+import { FaSearch } from 'react-icons/fa';
+import Header from '../../components/header/Header';
 
 const tweetPresenter = new TweetPresenter();
 const userPresenter = new UserPresenter();
@@ -14,6 +16,7 @@ const userPresenter = new UserPresenter();
 const TweetPage: React.FC = () => {
     const [tweets, setTweets] = useState<Tweet[]>([]);
 
+    
     useEffect(() => {
         loadTweets();
     }, []);
@@ -24,34 +27,21 @@ const TweetPage: React.FC = () => {
         });
     };
 
-    const handleLogout = () => {
-        userPresenter.logout().then(() => {
-            alert('You have been logged out!');
-            window.location.href = '/';
-        });
-    };
 
 
     return (
         <div className={styles.layout}>
             <Sidebar />
-
+            <Header />
         <div className={styles.centerSection}>
-            <div className={styles.header}>
-                <div className={styles.headerItem}>For you</div>
-                <div className={styles.headerItem}>Following</div>
-            </div>
-            <div className="content">
+            <div className={styles.content}>
                 <AddTweet onTweetAdded={loadTweets} />
                 <Tweets tweets={tweets}/>
             </div>
         </div>
-        <div className='right-section'>
-            <div className='search-bar'>
-                Search bar
-            </div>
-            <div className='who-to-follow'>
-                Who to Follow
+        <div className={styles.rightSection}>
+            <div className={styles.searchBar}>
+                <Input icon={FaSearch}></Input>
             </div>
         </div>
     </div>

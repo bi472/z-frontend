@@ -1,13 +1,13 @@
 .button {
     width: 150px;
     padding: 8px 16px;
-    margin-left: auto;
-    background-color: #007bff;
+    background-color: #0065d2;
     color: white;
     border: none;
     border-radius: 100px;
     cursor: pointer;
     text-transform: uppercase;
+    margin: 5px;
 }
 
 .button:hover {

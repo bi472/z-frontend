@@ -1,8 +1,8 @@
 .container {
     display: flex;
     flex-direction: column;
-    border-right: white 0.5px solid;
-    
+    position: fixed;
+    width: 275px;
 }
 
 .logo {
@@ -11,6 +11,7 @@
 }
 
 .sidebar {
+    margin-left: 20px;
     padding-top: 20px;
     width: 100%;
     display: flex;
@@ -18,4 +19,17 @@
     align-items: flex-start; /* Выравнивание элементов по левому краю */
     justify-content: center; /* Центрирование элементов по вертикали */
     height: 50vh; /* Для демонстрации можете задать высоту контейнера */
+    font-weight: bold;
+}
+
+.authButtons{
+    display: flex;
+    justify-content: center;
+}
+
+.loginAndSignUpButtons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }

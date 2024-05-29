@@ -3,11 +3,14 @@ import styles from './Button.module.css';
 
 interface ButtonProps {
     children: React.ReactNode;
+    onClick?: () => void;
 }
 
-const Button: React.FC<ButtonProps> = ({ children }) => {
+const Button: React.FC<ButtonProps> = ({ children, onClick }) => {
     return (
-            <button className={styles.button} type="submit">
+            <button className={styles.button} 
+            onClick={onClick}
+            type="submit">
                 {children}
             </button>
     );
