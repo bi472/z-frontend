@@ -3,7 +3,7 @@ import axios from 'axios';
 import axiosInstance from "../services/AxiosService";
 
 class TweetPresenter {
-    getTweets(): Promise<Tweet[]>{
+    async getTweets(): Promise<Tweet[]> {
         const tweets = new Promise<Tweet[]>((resolve, reject) => {
             axios.get('http://localhost:5000/tweets').then((response) => {
                 resolve(response.data);
@@ -21,7 +21,7 @@ class TweetPresenter {
         };
 
         return new Promise<Tweet>((resolve, reject) => {
-            axios.post('http://localhost:5000/tweets', data, {
+            axiosInstance.post('http://localhost:5000/tweets', data, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('access_token')}`
                 }
@@ -33,19 +33,62 @@ class TweetPresenter {
         })
     }
 
-    async EditTweet(tweet: Tweet): Promise<Tweet> {
+    async editTweet(tweet: Tweet): Promise<Tweet> {
         const data = {
             content: tweet.content
         };
 
         return new Promise<Tweet>((resolve, reject) => {
-            axiosInstance.put('tweets/' + tweet.uuid, data).then((response) => {
+            axiosInstance.patch('tweets/' + tweet.uuid, data, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('access_token')}`
+                }
+            }).then((response) => {
                 resolve(response.data);
             }).catch((error) => {
                 reject(error);
             });
         })
     }
+
+    async findByUserUuid(uuid: string): Promise<Tweet[]>{
+        return new Promise<Tweet[]>((resolve, reject) => {
+            axiosInstance.get('tweets', {
+                params: {
+                    followedByUserUuid: uuid
+                }
+            }).then((response) => {
+                resolve(response.data);
+            }).catch((error) => {
+                reject(error);
+            });
+        });
+    }
+
+    async deleteTweet(tweet: Tweet): Promise<void> {
+        return new Promise<void>((resolve, reject) => {
+            axiosInstance.delete('tweets/' + tweet.uuid, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('access_token')}`
+                }
+            }).then(() => {
+                resolve();
+            }).catch((error) => {
+                reject(error);
+            });
+        });
+    }
+
+    async findByUsername(username: string): Promise<Tweet[]> {
+        return new Promise<Tweet[]>((resolve, reject) => {
+            axiosInstance.get('tweets/username/' + username).then((response) => {
+                resolve(response.data);
+            }).catch((error) => {
+                reject(error);
+            });
+        });
+    }
+
 }
 
 export default TweetPresenter;

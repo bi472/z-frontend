@@ -28,7 +28,7 @@ const LoginPage: React.FC = () => {
 
     return (
         <div>
-            <AuthForm handleAuth={handleLogin} title={"Login"} buttonText={"Login"}></AuthForm>
+            <AuthForm handleAuth={handleLogin} title={"Login"} buttonText={"Login"} showRegisterLink={true}></AuthForm>
             <p className={styles.register_label} onClick={() => window.location.href = '/register'}>Don't have an account? Register here.</p>
         </div>
     );

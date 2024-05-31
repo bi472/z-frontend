@@ -1,0 +1,55 @@
+.container {
+    padding: 20px;
+  }
+  
+  .selector {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+
+.select{
+    background-color: #444444;
+    color: white;
+    padding: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.markAllAsRead{
+    color: white;
+    background-color: #444444;
+    border: #5d5d5d;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.markAllAsRead:hover{
+    background-color: #5d5d5d;
+}
+
+.select:hover{
+    background-color: #5d5d5d;
+}
+  
+  .notification {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #444444;
+    background-color: #5d5d5d;
+    margin-bottom: 5px;
+    border-radius: 4px;
+  }
+  
+  .notificationIcon {
+    margin-right: 10px;
+  }
+  
+  .notificationContent {
+    flex-grow: 1;
+  }
+  

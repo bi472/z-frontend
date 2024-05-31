@@ -1,0 +1,60 @@
+.layout {
+    display: grid;
+    grid-template-columns: 275px 1fr 275px;
+}
+
+.centerSection{
+    grid-column: 2 / 3;
+}
+
+.content{
+    padding-top: 60px;
+}
+
+
+.rightSection{
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    display: flex;
+    flex-direction: column;
+    width: 275px; /* Ширина фиксированной секции */
+    height: 100vh; /* Высота фиксированной секции */
+    align-items: center;
+    border-left: white 1px solid;
+}
+
+.searchBar {
+    position: relative;
+    background-color: #6a6a6add;
+    margin-top: 10px;
+    padding: 10px;
+    border: rgb(115, 115, 115) 1px solid ;
+    border-radius: 10px;
+    
+}
+
+.searchResults {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    background-color: rgb(63, 63, 63);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 10;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.searchResultItem {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.searchResultItem:hover {
+    background-color: #f0f0f0;
+}

@@ -2,8 +2,51 @@ import { AuthDTO } from '../types/AuthDto';
 import { generateFingerprint } from '../utils/getFingerprint';
 import axios from 'axios';
 import axiosInstance from "../services/AxiosService";
+import { User } from '../models/User';
 
 export class UserPresenter {
+
+    public async getAllUsers(): Promise<User[]> {
+        return new Promise((resolve, reject) => {
+            axiosInstance.get('users', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('access_token')}`
+                }
+            }).then((response) => {
+                resolve(response.data);
+            }).catch((error) => {
+                reject(error);
+            });
+        });
+    }
+
+    public findUserByUuid(uuid: string): Promise<User> {
+        return new Promise((resolve, reject) => {
+            axiosInstance.get(`users/${uuid}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('access_token')}`
+                }
+            }).then((response) => {
+                resolve(response.data);
+            }).catch((error) => {
+                reject(error);
+            });
+        });
+    }
+
+    public findUserByUsername(username: string): Promise<User> {
+        return new Promise((resolve, reject) => {
+            axiosInstance.get(`users/username/${username}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('access_token')}`
+                }
+            }).then((response) => {
+                resolve(response.data);
+            }).catch((error) => {
+                reject(error);
+            });
+        });
+    }
 
     public login(authDTO: AuthDTO): Promise<void> {
         const data = {
@@ -55,12 +98,14 @@ export class UserPresenter {
                 localStorage.removeItem('access_token');
                 resolve(response.data);
             }).catch((error) => {
+                localStorage.removeItem('access_token');
+                window.location.href = '/login';
                 reject(error);
             });
         })
     }
 
-    public me(): Promise<String> {
+    public me(): Promise<User> {
         return new Promise((resolve, reject) => {
             axiosInstance.get('auth/me', {
                 headers: {
@@ -74,4 +119,5 @@ export class UserPresenter {
             });
         });
     }
+
 }

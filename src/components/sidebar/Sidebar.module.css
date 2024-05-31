@@ -3,6 +3,8 @@
     flex-direction: column;
     position: fixed;
     width: 275px;
+    height: 100%;
+    border-right: white 1px solid;
 }
 
 .logo {

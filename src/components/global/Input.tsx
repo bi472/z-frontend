@@ -1,25 +1,23 @@
-import styles from './Input.module.css';
-import { IconType } from 'react-icons';
+import React from 'react';
 
 interface InputProps {
-    placeholder?: string;
-    type?: string;
-    icon: IconType;
+    icon: React.ElementType;
+    value: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input: React.FC<InputProps> = ({ placeholder, type, icon: Icon }) => {
+const Input: React.FC<InputProps> = ({ icon: Icon, value, onChange }) => {
     return (
-        <div className={styles.searchBar}>
+        <div style={{ display: 'flex', alignItems: 'center', backgroundColor: "none" }}>
+            <Icon />
             <input
-                type={type || 'text'}
-                placeholder={placeholder || 'Search'}
-                className={styles.input}
+                type="text"
+                value={value}
+                onChange={onChange}
+                style={{ marginLeft: '10px', padding: '5px', width: '100%' }}
             />
-            <div className={styles.icon}>
-                <Icon />
-            </div>
         </div>
-    )
-}
+    );
+};
 
 export default Input;

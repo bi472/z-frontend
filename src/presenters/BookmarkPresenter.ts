@@ -1,0 +1,56 @@
+import { Tweet } from "../models/Tweet";
+import axiosInstance from "../services/AxiosService";
+
+export class BookmarkPresenter {
+
+    public async bookmark(uuid: string): Promise<Tweet> {
+        return new Promise((resolve, reject) => {
+            axiosInstance.patch(`tweets/${uuid}/bookmark`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+                },
+                params: {
+                    uuid,
+                }
+            }).then((response) => {
+                resolve(response.data);
+                return response.data;
+            }).catch((error) => {
+                reject(error);
+            });
+        });
+    }
+
+    public async removeBookmark(uuid: string): Promise<Tweet> {
+        return new Promise((resolve, reject) => {
+            axiosInstance.delete(`tweets/${uuid}/bookmark`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+                },
+                params: {
+                    uuid,
+                }
+            }).then((response) => {
+                resolve(response.data);
+                return response.data;
+            }).catch((error) => {
+                reject(error);
+            });
+        });
+    }
+
+    public async findBookmarks(): Promise<Tweet[]> {
+        return new Promise((resolve, reject) => {
+            axiosInstance.get('tweets/bookmarks/all', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+                },
+            }).then((response) => {
+                resolve(response.data);
+                return response.data;
+            }).catch((error) => {
+                reject(error);
+            });
+        });
+    }
+}
