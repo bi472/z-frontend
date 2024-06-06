@@ -4,7 +4,7 @@ import axiosInstance from "../services/AxiosService";
 export class LikePresenter {
     public async like(uuid: string): Promise<Tweet> {
         return new Promise((resolve, reject) => {
-            axiosInstance.patch(`tweets/${uuid}/like`, {
+            axiosInstance.patch(`likes/${uuid}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('access_token')}`,
                 },
@@ -19,7 +19,7 @@ export class LikePresenter {
 
     public async unlike(uuid: string): Promise<Tweet> {
         return new Promise((resolve, reject) => {
-            axiosInstance.delete(`tweets/${uuid}/like`, {
+            axiosInstance.delete(`likes/${uuid}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('access_token')}`,
                 },

@@ -18,6 +18,8 @@
     border: none;
     outline: none;
     background-color: transparent;
+    resize: vertical; /* Позволяет изменять размер textarea вертикально */
+    white-space: pre-wrap; /* Сохраняет пробелы и переносы строк */
 }
 
 .buttonContainer{

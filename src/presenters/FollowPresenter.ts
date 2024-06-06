@@ -5,7 +5,7 @@ export class FollowPresenter {
 
     public async follow(uuid: string): Promise<User[]> {
         return new Promise((resolve, reject) => {
-            axiosInstance.patch(`users/${uuid}/follow`, {
+            axiosInstance.patch(`user-followers/${uuid}/follow`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('access_token')}`,
                 },
@@ -20,7 +20,7 @@ export class FollowPresenter {
     
     public async findFollowing(uuid: string): Promise<User[]> {
         return new Promise((resolve, reject) => {
-            axiosInstance.get(`users/${uuid}/following`, {
+            axiosInstance.get(`user-followers/${uuid}/following`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('access_token')}`,
                 }
@@ -35,7 +35,7 @@ export class FollowPresenter {
 
     public async unfollow(uuid: string): Promise<User[]> {
         return new Promise((resolve, reject) => {
-            axiosInstance.delete(`users/${uuid}/follow`, {
+            axiosInstance.delete(`user-followers/${uuid}/follow`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('access_token')}`,
                 }

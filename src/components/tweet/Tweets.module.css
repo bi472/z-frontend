@@ -55,6 +55,7 @@
     line-height: 1.5; /* Enhanced line spacing for easier reading */
     border: white 1px solid;
     box-shadow: #777;
+    white-space: pre-wrap;
 }
 
 .actions{

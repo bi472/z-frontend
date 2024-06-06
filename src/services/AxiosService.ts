@@ -5,7 +5,7 @@ import { AuthResponseDto } from '../types/AuthResponseDto';
 
 const baseURL = 'http://localhost:5000/';
 
-const axiosInstance = axios.create({
+const  axiosInstance = axios.create({
   baseURL: baseURL,
   withCredentials: true,
 });
@@ -53,51 +53,5 @@ axiosInstance.interceptors.request.use(
   (error: AxiosError) => Promise.reject(error)
 );
 
-axiosInstance.interceptors.response.use(
-  (response: AxiosResponse) => response,
-  async (error: AxiosError) => {
-    const originalRequest = error.config;
-    // @ts-ignore
-    if (error.response?.status === 401 && !originalRequest._retry) {
-      if (isRefreshing) {
-        return new Promise((resolve, reject) => {
-          failedQueue.push({ resolve, reject });
-        }).then(token => {
-            // @ts-ignore
-          originalRequest.headers['Authorization'] = `Bearer ${token}`;
-          // @ts-ignore
-          return axiosInstance(originalRequest);
-        }).catch(err => Promise.reject(err));
-      }
-
-      // @ts-ignore
-      originalRequest._retry = true;
-      isRefreshing = true;
-
-      try {
-        localStorage.removeItem('access_token');
-        const fingerprint = await generateFingerprint();
-        const refreshDto: RefreshDto = { fingerprint: fingerprint };
-        await refreshAccessToken(refreshDto);
-        const newToken = getAccessToken();
-        axiosInstance.defaults.headers['Authorization'] = `Bearer ${newToken}`;
-        // @ts-ignore
-        originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
-        processQueue(null, newToken);
-        // @ts-ignore
-        return axiosInstance(originalRequest);
-      } catch (err) {
-      // @ts-ignore
-        
-        processQueue(err, null);
-        return Promise.reject(err);
-      } finally {
-        isRefreshing = false;
-      }
-    }
-
-    return Promise.reject(error);
-  }
-);
 
 export default axiosInstance;

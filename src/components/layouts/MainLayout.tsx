@@ -16,6 +16,7 @@ const MainLayout: React.FC<LayoutProps> = ({ children }) => {
     const userPresenter = new UserPresenter();
     const navigate = useNavigate();
 
+    // Обновление результатов поиска при изменении поискового запроса
     useEffect(() => {
         if (searchTerm) {
             userPresenter.getAllUsers().then((users) => {
@@ -29,10 +30,12 @@ const MainLayout: React.FC<LayoutProps> = ({ children }) => {
         }
     }, [searchTerm]);
 
+    // Обработчик изменения поискового запроса
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(e.target.value);
     };
 
+    // Обработчик нажатия на пользователя в результатах поиска
     const handleUserClick = (username: string) => {
         setSearchTerm('');
         navigate(`/profile/${username}`);

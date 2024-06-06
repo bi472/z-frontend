@@ -1,18 +1,16 @@
-import { Tweet } from '../models/Tweet';
+import {Tweet} from '../models/Tweet';
 import axios from 'axios';
 import axiosInstance from "../services/AxiosService";
 
 class TweetPresenter {
     async getTweets(): Promise<Tweet[]> {
-        const tweets = new Promise<Tweet[]>((resolve, reject) => {
+        return new Promise<Tweet[]>((resolve, reject) => {
             axios.get('http://localhost:5000/tweets').then((response) => {
                 resolve(response.data);
             }).catch((error) => {
                 reject(error);
             });
         });
-
-        return tweets;
     }
 
     async addTweet(tweet: string): Promise<Tweet> {

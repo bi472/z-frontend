@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tweet } from '../../models/Tweet';
+import { Tweet } from '../../../models/Tweet';
 import styles from './DeleteTweetModal.module.css';
 
 interface DeleteTweetModalProps {
@@ -19,8 +19,8 @@ const DeleteTweetModal: React.FC<DeleteTweetModalProps> = ({ tweet, onDelete, on
       <div className={styles.modalContent}>
         <p>Are you sure you want to delete this tweet?</p>
         <div className={styles.modalActions}>
-          <button onClick={handleDelete}>Delete</button>
-          <button onClick={onClose}>Cancel</button>
+          <button className={styles.button} onClick={handleDelete}>Delete</button>
+          <button className={styles.button} onClick={onClose}>Cancel</button>
         </div>
       </div>
     </div>

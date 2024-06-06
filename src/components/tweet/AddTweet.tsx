@@ -12,7 +12,7 @@ const AddTweet: React.FC<AddTweetProps> = ({ onTweetAdded }) => {
 
     const tweetPresenter = new TweetPresenter();
 
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setTweet(event.target.value);
     };
 
@@ -39,7 +39,7 @@ const AddTweet: React.FC<AddTweetProps> = ({ onTweetAdded }) => {
     return (
         <div className={styles.tweetFormContainer}>
         <form onSubmit={handleSubmit} className={styles.tweetForm}>
-            <input className = {styles.inputTweet} type="text" value={tweet} placeholder='Input your tweet here!' onChange={handleInputChange} />
+            <textarea className = {styles.inputTweet} value={tweet} placeholder='Input your tweet here!' onChange={handleInputChange} />
             <div className={styles.buttonContainer}>
                 <Button>Post</Button>
             </div>

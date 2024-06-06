@@ -5,7 +5,7 @@ export class BookmarkPresenter {
 
     public async bookmark(uuid: string): Promise<Tweet> {
         return new Promise((resolve, reject) => {
-            axiosInstance.patch(`tweets/${uuid}/bookmark`, {
+            axiosInstance.patch(`bookmarks/${uuid}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('access_token')}`,
                 },
@@ -23,7 +23,7 @@ export class BookmarkPresenter {
 
     public async removeBookmark(uuid: string): Promise<Tweet> {
         return new Promise((resolve, reject) => {
-            axiosInstance.delete(`tweets/${uuid}/bookmark`, {
+            axiosInstance.delete(`bookmarks/${uuid}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('access_token')}`,
                 },
@@ -41,7 +41,7 @@ export class BookmarkPresenter {
 
     public async findBookmarks(): Promise<Tweet[]> {
         return new Promise((resolve, reject) => {
-            axiosInstance.get('tweets/bookmarks/all', {
+            axiosInstance.get('bookmarks', {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('access_token')}`,
                 },
