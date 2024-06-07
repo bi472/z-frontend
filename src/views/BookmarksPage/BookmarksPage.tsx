@@ -10,7 +10,6 @@ const BookmarksPage: React.FC = () => {
 
   useEffect(() => {
     bookmarkPresenter.findBookmarks().then((loadedBookmarks) => {
-        console.log(loadedBookmarks);
       setBookmarks(loadedBookmarks);
     });
   }, []);

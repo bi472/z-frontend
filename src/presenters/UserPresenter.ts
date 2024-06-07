@@ -86,7 +86,6 @@ export class UserPresenter {
 
     public logout(): Promise<void> {
         return new Promise((resolve, reject) => {
-            // add barear token to header
             const data = {};
             axiosInstance.post('auth/logout', data, 
             {

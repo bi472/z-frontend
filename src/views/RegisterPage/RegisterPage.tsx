@@ -1,6 +1,6 @@
 import React from 'react';
 import { UserPresenter } from '../../presenters/UserPresenter';
-import AuthForm from "../../components/AuthForm";
+import AuthForm from "../../components/auth/AuthForm";
 import {AuthDTO} from "../../types/AuthDto";
 
 const RegisterPage: React.FC = () => {

@@ -2,7 +2,7 @@ import React from 'react';
 import  styles from './LoginPage.module.css';
 
 import { UserPresenter } from '../../presenters/UserPresenter';
-import AuthForm from "../../components/AuthForm";
+import AuthForm from "../../components/auth/AuthForm";
 import {AuthDTO} from "../../types/AuthDto";
 
 const LoginPage: React.FC = () => {

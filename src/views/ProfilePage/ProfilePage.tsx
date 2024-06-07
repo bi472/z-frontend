@@ -45,6 +45,7 @@ const ProfilePage: React.FC = () => {
 
             if (uuid) {
                 const followingUsers = await followPresenter.findFollowing(uuid);
+                console.log(followingUsers);
                 const isUserFollowing = followingUsers.some(user => user.username === fetchedUsername);
                 setFollowing(isUserFollowing);
             }
@@ -52,34 +53,6 @@ const ProfilePage: React.FC = () => {
 
         fetchUserAndTweets();
     }, [identifier]);
-
-    const handleLike = (tweet: Tweet) => {
-        console.log('Liked tweet:', tweet);
-    };
-
-    const handleEdit = (tweet: Tweet) => {
-        tweetPresenter.editTweet(tweet).then((updatedTweet) => {
-            console.log('Updated tweet:', updatedTweet);
-            loadTweets();
-        }).catch((error) => {
-            console.log(error);
-            alert('An error occurred');
-        });
-    };
-
-    const handleBookmark = (tweet: Tweet) => {
-        console.log('Bookmark tweet:', tweet);
-    };
-
-    const handleDelete = (tweet: Tweet) => {
-        tweetPresenter.deleteTweet(tweet).then(() => {
-            console.log('Deleted tweet:', tweet);
-            loadTweets();
-        }).catch((error) => {
-            console.log(error);
-            alert('An error occurred');
-        });
-    };
 
     const loadTweets = () => {
         if (username) {
@@ -127,11 +100,8 @@ const ProfilePage: React.FC = () => {
             <div className={styles.tweetsList}>
                 <Tweets
                     tweets={tweets}
-                    onLike={handleLike}
-                    onEdit={handleEdit}
-                    onDelete={handleDelete}
-                    onBookmark={handleBookmark}
                     showFollowButton={false}
+                    loadTweets={loadTweets}
                 />
             </div>
         </div>

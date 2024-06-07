@@ -13,22 +13,21 @@ import { FollowPresenter } from '../../presenters/FollowPresenter';
 import { User } from '../../models/User';
 import { LikePresenter } from '../../presenters/LikePresenter';
 import { BookmarkPresenter } from '../../presenters/BookmarkPresenter';
+import TweetPresenter from '../../presenters/TweetPresenter';
 
 interface TweetsProps {
   tweets: Tweet[];
-  onLike: (tweet: Tweet) => void;
-  onEdit: (tweet: Tweet) => void;
-  onBookmark: (tweet: Tweet) => void;
-  onDelete: (tweet: Tweet) => void;
   showFollowButton: boolean;
+  loadTweets: () => void;
 }
 
-const Tweets: React.FC<TweetsProps> = ({ tweets, onLike, onEdit, onBookmark, onDelete, showFollowButton }) => {
+const Tweets: React.FC<TweetsProps> = ({ tweets, showFollowButton, loadTweets }) => {
   // Получение UUID вошедшего пользователя
   const userUuid = getUUIDFromToken();
   const followPresenter = new FollowPresenter();
   const likePresenter = new LikePresenter();
   const bookmarkPresenter = new BookmarkPresenter();
+  const tweetPresenter = new TweetPresenter();
 
   // Определение переменных состояния для редактирования, удаления твитов, подписанных пользователей, лайкнутых и добавленных в закладки твитов
   const [editingTweet, setEditingTweet] = useState<Tweet | null>(null);
@@ -44,6 +43,7 @@ const Tweets: React.FC<TweetsProps> = ({ tweets, onLike, onEdit, onBookmark, onD
     }
     followPresenter.findFollowing(userUuid).then(
         (users) => {
+          console.log('Following users:', users);
           setFollowingUsers(users);
         });
   }, []);
@@ -88,13 +88,27 @@ const Tweets: React.FC<TweetsProps> = ({ tweets, onLike, onEdit, onBookmark, onD
 
   // Сохранение изменений твита
   const handleSave = (updatedTweet: Tweet) => {
-    onEdit(updatedTweet);
+    
+    tweetPresenter.editTweet(updatedTweet).then((updatedTweet) => {
+      console.log('Updated tweet:', updatedTweet);
+      loadTweets();
+  }).catch((error) => {
+      console.log(error);
+      alert('An error occurred');
+  });
     setEditingTweet(null);
   };
 
   // Удаление твита
   const handleDelete = (tweet: Tweet) => {
-    onDelete(tweet);
+    
+    tweetPresenter.deleteTweet(tweet).then(() => {
+      console.log('Deleted tweet:', tweet);
+      loadTweets();
+  }).catch((error) => {
+      console.log(error);
+      alert('An error occurred');
+  });
     setDeletingTweet(null);
   };
 
@@ -109,9 +123,9 @@ const Tweets: React.FC<TweetsProps> = ({ tweets, onLike, onEdit, onBookmark, onD
   };
 
   // Проверка, подписан ли текущий пользователь на автора твита
-  const isFollowing = (tweet: Tweet, user?: User) => {
+  const isFollowing = (tweet: Tweet) => {
     return !!followingUsers?.find(user => user.uuid === tweet.user?.uuid);
-  };
+  }
 
   // Обработчик нажатия на кнопку лайка
   const handleLikeClick = (tweet: Tweet) => {
