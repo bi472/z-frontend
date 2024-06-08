@@ -1,46 +1,87 @@
-# Getting Started with Create React App
+# z-frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Demo link:
 
-## Available Scripts
+Coming soon
 
-In the project directory, you can run:
+## Documentation
 
-### `npm start`
+Coming soon
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Table of Content:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- About The App
+- Technologies
+- Screenshots
+- Setup
+- Environment Variables
+- To-Do
+- Documentation
+- Status
+- Related Projects
 
-### `npm test`
+## About The App
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+z-frontend is the frontend application for a Twitter-like platform, designed to implement a tree-like structure for message replies.
 
-### `npm run build`
+## Technologies
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This project uses:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **React**
+- **TypeScript**
+- **Axios** for API requests
+- **Jest** for testing
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Screenshots
 
-### `npm run eject`
+### Home Page
+[![Home Page](https://i.postimg.cc/G8NFrnkF/IMG-20240608-123643-204.jpg)](https://postimg.cc/G8NFrnkF)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Notifications
+[![Notifications](https://i.postimg.cc/JDtN9zB7/IMG-20240608-123646-570.jpg)](https://postimg.cc/JDtN9zB7)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Bookmarks
+[![Bookmarks](https://i.postimg.cc/xk6Gxz8F/IMG-20240608-123653-511.jpg)](https://postimg.cc/xk6Gxz8F)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Setup
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```bash
+git clone https://github.com/bi472/z-frontend.git
+cd z-frontend
 
-## Learn More
+# Install dependencies
+npm install
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Create .env file based on .env-example
+cp .env-example .env
+nano .env
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Start the application
+npm start
+```
+
+Done!
+
+## Environment Variables
+
+```plaintext
+REACT_APP_API_URL=http://localhost:4000
+```
+
+## To-Do
+
+- Add form validation.
+- Improve component testing.
+- Optimize for production.
+- Implement pagination.
+- Implement multi-line text hiding.
+- Complete Axios service.
+
+## Status
+
+z-frontend works stably. Main features are implemented.
+
+## Related Projects
+
+- [z-backend](https://github.com/bi472/z-backend)
