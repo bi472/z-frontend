@@ -10,14 +10,23 @@ import { FollowPresenter } from '../../presenters/FollowPresenter';
 import { getUUIDFromToken } from '../../utils/getUUIDFromToken';
 
 const ProfilePage: React.FC = () => {
+
     const { identifier } = useParams<{ identifier: string }>();
-    const userPresenter = new UserPresenter();
-    const tweetPresenter = new TweetPresenter();
-    const followPresenter = new FollowPresenter();
     const [username, setUsername] = useState<string | null>(null);
     const [tweets, setTweets] = useState<Tweet[]>([]);
     const [following, setFollowing] = useState<boolean>(false);
     const [userUuid, setUserUuid] = useState<string | null>(null);
+    const [profileUserUuid, setProfileUserUuid] = useState<string | null>(null);
+    const [biography, setBiography] = useState<string>('');
+    const [isEditingBio, setIsEditingBio] = useState<boolean>(false);
+    const [editedBio, setEditedBio] = useState<string>('');
+    const [isOwner, setIsOwner] = useState<boolean>(false);
+
+    const userPresenter = new UserPresenter();
+    const tweetPresenter = new TweetPresenter();
+    const followPresenter = new FollowPresenter();
+
+    const bio_placeholder = "This user is so busy saving the world and eating pizza that they haven't found time to write a biography. But you can be sure they are a person with amazing talents and a great sense of humor.";
 
     useEffect(() => {
         const fetchUserAndTweets = async () => {
@@ -26,9 +35,12 @@ const ProfilePage: React.FC = () => {
             if (!identifier) {
                 const user = await userPresenter.me();
                 fetchedUsername = user.username;
+                setUserUuid(user.uuid);
             } else {
                 // Assuming identifier can be either username or uuid
                 fetchedUsername = identifier.includes('@') ? identifier.slice(1) : identifier;
+                const uuid = getUUIDFromToken();
+                setUserUuid(uuid);
             }
 
             if (!fetchedUsername) {
@@ -37,22 +49,24 @@ const ProfilePage: React.FC = () => {
 
             setUsername(fetchedUsername);
 
+            const fetchedUser = await userPresenter.findUserByUsername(fetchedUsername);
+            setBiography(fetchedUser.biography);
+            setEditedBio(fetchedUser.biography);
+            setProfileUserUuid(fetchedUser.uuid);
+            setIsOwner(fetchedUser.uuid === userUuid);
+
             const fetchedTweets = await tweetPresenter.findByUsername(fetchedUsername);
             setTweets(fetchedTweets);
 
-            const uuid = getUUIDFromToken();
-            setUserUuid(uuid);
-
-            if (uuid) {
-                const followingUsers = await followPresenter.findFollowing(uuid);
-                console.log(followingUsers);
+            if (userUuid) {
+                const followingUsers = await followPresenter.findFollowing(userUuid);
                 const isUserFollowing = followingUsers.some(user => user.username === fetchedUsername);
                 setFollowing(isUserFollowing);
             }
         };
 
         fetchUserAndTweets();
-    }, [identifier]);
+    }, [identifier, userUuid]);
 
     const loadTweets = () => {
         if (username) {
@@ -79,22 +93,62 @@ const ProfilePage: React.FC = () => {
                     });
                 }
             });
-        
+    };
+
+    const handleEditBioClick = () => {
+        setIsEditingBio(true);
+    };
+
+    const handleSaveBioClick = async () => {
+        if (userUuid && isOwner) {
+            await userPresenter.updateBiography(editedBio);
+            setBiography(editedBio);
+            setIsEditingBio(false);
+        }
+    };
+
+    const handleBioChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setEditedBio(event.target.value);
     };
 
     return (
         <div className={styles.container}>
             <div className={styles.header}>
-                <h2>{username ? `${username}` : 'Loading...'}</h2>
-                
-                {username && (
-                    <FollowButton
-                        isFollowing={following}
-                        onClick={handleFollowClick}
-                    >
-                        {following ? 'Unfollow' : 'Follow'}
-                    </FollowButton>
-                )}
+                <div className={styles.profileContainer}>
+                    <img className={styles.avatar} src="https://via.placeholder.com/150" alt="Profile" />
+                    <div className={styles.profileInfo}>
+                        <div className={styles.usernameAndButton}>
+                            <h2>{username ? `${username}` : 'Loading...'}</h2>
+                            {username && (
+                                <FollowButton
+                                    isFollowing={following}
+                                    onClick={handleFollowClick}
+                                >
+                                    {following ? 'Unfollow' : 'Follow'}
+                                </FollowButton>
+                            )}
+                        </div>
+                        {isOwner ? (
+                            isEditingBio ? (
+                                <div>
+                                    <textarea
+                                        className={styles.biographyEdit}
+                                        value={editedBio}
+                                        onChange={handleBioChange}
+                                    />
+                                    <button onClick={handleSaveBioClick}>Save</button>
+                                </div>
+                            ) : (
+                                <div>
+                                    <p className={styles.biography}>{biography ? biography : bio_placeholder}</p>
+                                    <button onClick={handleEditBioClick}>Edit</button>
+                                </div>
+                            )
+                        ) : (
+                            <p className={styles.biography}>{biography ? biography : bio_placeholder}</p>
+                        )}
+                    </div>
+                </div>
             </div>
 
             <div className={styles.tweetsList}>

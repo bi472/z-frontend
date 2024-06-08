@@ -3,6 +3,7 @@ import { Tweet } from "./Tweet";
 export interface User{
     uuid: string;
     username: string;
+    biography: string;
     password: string;
     tweets: Tweet[];
     likedTweets: Tweet[];

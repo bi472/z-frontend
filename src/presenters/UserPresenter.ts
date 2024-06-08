@@ -119,4 +119,18 @@ export class UserPresenter {
         });
     }
 
+    public updateBiography(biography: string): Promise<User> {
+        return new Promise((resolve, reject) => {
+            axiosInstance.patch('users/biography', { biography }, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('access_token')}`
+                }
+            }).then((response) => {
+                resolve(response.data);
+            }).catch((error) => {
+                reject(error);
+            });
+        });
+    }
+
 }
