@@ -1,18 +1,19 @@
-import styles from "./Sidebar.module.css";
-import { FaHome, FaBell, FaBookmark, FaUser } from 'react-icons/fa';
-import logo from '../../assets/logo.png'
-import SidebarItem from "./sidebarItem/SidebarItem";
+import { FaBell, FaBookmark, FaHome, FaSearch, FaUser } from 'react-icons/fa';
+import logo from '../../assets/logo.png';
+import { UserPresenter } from "../../presenters/UserPresenter";
 import { isLoggedIn } from "../../utils/loginCheck";
 import Button from "../global/Button";
-import { UserPresenter } from "../../presenters/UserPresenter";
-import { error } from "console";
-import { get } from "http";
-import { getUUIDFromToken } from "../../utils/getUUIDFromToken";
+import styles from "./Sidebar.module.css";
+import SidebarItem from "./sidebarItem/SidebarItem";
 
 
 const Sidebar = () => {
 
     const userPresenter = new UserPresenter()
+
+    const handleSearch = () => {
+        window.location.href = '/search'; // Переход на страницу поиска
+    };
 
     const handleHome = () => {
         window.location.href = '/'
@@ -76,6 +77,9 @@ const Sidebar = () => {
                 {sidebarItems.map((item, index) => (
                     <SidebarItem key={index} name={item.name} icon={item.icon} onClick={item.onClick}/>
                 ))}
+                <div className={styles.searchIcon} onClick={handleSearch}>
+                    <FaSearch className={styles.icon}/>
+                </div>
             </div>
             <div className={styles.authButtons}>
                     {isLoggedIn() ? 

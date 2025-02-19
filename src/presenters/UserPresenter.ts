@@ -1,8 +1,7 @@
+import { User } from '../models/User';
+import axiosInstance from "../services/AxiosService";
 import { AuthDTO } from '../types/AuthDto';
 import { generateFingerprint } from '../utils/getFingerprint';
-import axios from 'axios';
-import axiosInstance from "../services/AxiosService";
-import { User } from '../models/User';
 
 export class UserPresenter {
 
@@ -119,13 +118,9 @@ export class UserPresenter {
         });
     }
 
-    public updateBiography(biography: string): Promise<User> {
+    public updateBiography(biography: string, uuid: string): Promise<User> {
         return new Promise((resolve, reject) => {
-            axiosInstance.patch('users/biography', { biography }, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('access_token')}`
-                }
-            }).then((response) => {
+            axiosInstance.patch(`users/${uuid}?type=biography`, { biography }).then((response) => {
                 resolve(response.data);
             }).catch((error) => {
                 reject(error);

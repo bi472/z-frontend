@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { FaEdit } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
-import { UserPresenter } from '../../presenters/UserPresenter';
-import Tweets from '../../components/tweet/Tweets';
-import styles from './ProfilePage.module.css';
-import TweetPresenter from '../../presenters/TweetPresenter';
-import { Tweet } from '../../models/Tweet';
 import FollowButton from '../../components/global/FollowButton';
+import Tweets from '../../components/tweet/Tweets';
+import { Tweet } from '../../models/Tweet';
 import { FollowPresenter } from '../../presenters/FollowPresenter';
+import TweetPresenter from '../../presenters/TweetPresenter';
+import { UserPresenter } from '../../presenters/UserPresenter';
 import { getUUIDFromToken } from '../../utils/getUUIDFromToken';
+import styles from './ProfilePage.module.css';
 
 const ProfilePage: React.FC = () => {
 
@@ -101,7 +102,7 @@ const ProfilePage: React.FC = () => {
 
     const handleSaveBioClick = async () => {
         if (userUuid && isOwner) {
-            await userPresenter.updateBiography(editedBio);
+            await userPresenter.updateBiography(editedBio, userUuid);
             setBiography(editedBio);
             setIsEditingBio(false);
         }
@@ -115,7 +116,6 @@ const ProfilePage: React.FC = () => {
         <div className={styles.container}>
             <div className={styles.header}>
                 <div className={styles.profileContainer}>
-                    <img className={styles.avatar} src="https://via.placeholder.com/150" alt="Profile" />
                     <div className={styles.profileInfo}>
                         <div className={styles.usernameAndButton}>
                             <h2>{username ? `${username}` : 'Loading...'}</h2>
@@ -139,9 +139,9 @@ const ProfilePage: React.FC = () => {
                                     <button onClick={handleSaveBioClick}>Save</button>
                                 </div>
                             ) : (
-                                <div>
+                                <div className={styles.biographyContainer}>
                                     <p className={styles.biography}>{biography ? biography : bio_placeholder}</p>
-                                    <button onClick={handleEditBioClick}>Edit</button>
+                                    <FaEdit onClick={handleEditBioClick}>Edit</FaEdit>
                                 </div>
                             )
                         ) : (

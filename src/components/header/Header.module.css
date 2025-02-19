@@ -20,3 +20,13 @@
     border-top: none;
     border-bottom: none;
 }
+
+@media (max-width: 768px) {
+    .header {
+        left: 95px;
+        right: 0;
+    }
+    .headerItem {
+        padding: 10px;
+    }
+}

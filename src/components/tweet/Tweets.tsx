@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import styles from './Tweets.module.css';
+import { FaBookmark, FaEdit, FaHeart, FaTrash } from 'react-icons/fa';
 import { Tweet } from '../../models/Tweet';
-import { FaHeart, FaEdit, FaBookmark, FaTrash } from 'react-icons/fa';
+import { User } from '../../models/User';
+import { BookmarkPresenter } from '../../presenters/BookmarkPresenter';
+import { FollowPresenter } from '../../presenters/FollowPresenter';
+import { LikePresenter } from '../../presenters/LikePresenter';
+import TweetPresenter from '../../presenters/TweetPresenter';
+import { getUUIDFromToken } from '../../utils/getUUIDFromToken';
 import { hasEditDeletePermission } from '../../utils/hasPermission';
 import { isLoggedIn } from '../../utils/loginCheck';
-import EditTweetModal from './modals/EditTweetModal';
-import DeleteTweetModal from './modals/DeleteTweetModal';
-import Button from '../global/Button';
 import FollowButton from '../global/FollowButton';
-import { getUUIDFromToken } from '../../utils/getUUIDFromToken';
-import { FollowPresenter } from '../../presenters/FollowPresenter';
-import { User } from '../../models/User';
-import { LikePresenter } from '../../presenters/LikePresenter';
-import { BookmarkPresenter } from '../../presenters/BookmarkPresenter';
-import TweetPresenter from '../../presenters/TweetPresenter';
+import DeleteTweetModal from './modals/DeleteTweetModal';
+import EditTweetModal from './modals/EditTweetModal';
+import styles from './Tweets.module.css';
 
 interface TweetsProps {
   tweets: Tweet[];
   showFollowButton: boolean;
   loadTweets: () => void;
+  tweetImages?: { [key: string]: string | null };
 }
 
 const Tweets: React.FC<TweetsProps> = ({ tweets, showFollowButton, loadTweets }) => {
@@ -35,6 +35,8 @@ const Tweets: React.FC<TweetsProps> = ({ tweets, showFollowButton, loadTweets })
   const [followingUsers, setFollowingUsers] = useState<User[]>();
   const [likedTweets, setLikedTweets] = useState<Tweet[]>();
   const [bookmarkedTweets, setBookmarkedTweets] = useState<Tweet[]>();
+  const [tweetImages, setTweetImages] = useState<{ [key: string]: string | null }>({});
+
 
   // Загрузка подписанных пользователей при монтировании компонента
   useEffect(() => {
@@ -191,7 +193,12 @@ const Tweets: React.FC<TweetsProps> = ({ tweets, showFollowButton, loadTweets })
                     </FollowButton>}
                 </div>
               </div>
-              <div className={styles.tweetContent}>{tweet.content}</div>
+              <div className={styles.tweetContent}>
+    {tweet.content}
+    {tweetImages[tweet.content] && (
+        <img src={tweetImages[tweet.content] || ''} alt="Tweet Preview" className={styles.imagePreview} />
+    )}
+</div>
               <div className={styles.tweetDateCreated}>{new Date(tweet.createdAt).toLocaleString()}</div>
               <div className={styles.tweetDateUpdated}>{new Date(tweet.updatedAt).toLocaleString()}</div>
               {isLoggedIn() &&

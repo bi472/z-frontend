@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import TweetPresenter from '../../presenters/TweetPresenter'
-import { Tweet } from '../../models/Tweet';
+import Header from '../../components/header/Header';
 import AddTweet from '../../components/tweet/AddTweet';
 import Tweets from '../../components/tweet/Tweets';
-import Header from '../../components/header/Header';
+import { Tweet } from '../../models/Tweet';
+import TweetPresenter from '../../presenters/TweetPresenter';
 import { UserPresenter } from '../../presenters/UserPresenter';
 import { getUUIDFromToken } from '../../utils/getUUIDFromToken';
 
@@ -12,8 +12,8 @@ const TweetPage: React.FC = () => {
     const tweetPresenter = new TweetPresenter();
     const userPresenter = new UserPresenter();
     const [tweets, setTweets] = useState<Tweet[]>([]);
+    const [tweetImages, setTweetImages] = useState<{ [key: string]: string | null }>({});
     const userUuid = getUUIDFromToken()
-
 
     useEffect(() => {
         loadTweets();
@@ -42,10 +42,11 @@ const TweetPage: React.FC = () => {
             <Header onFollowingTweet={handleFollowingTweet} onForYouTweet={handleForYouTweet}/>
             <AddTweet onTweetAdded={loadTweets} />
             <Tweets
-                tweets={tweets}
-                showFollowButton={true}
-                loadTweets={loadTweets}
-            />
+    tweets={tweets}
+    showFollowButton={true}
+    loadTweets={loadTweets}
+/>
+
         </div>
     );
 }

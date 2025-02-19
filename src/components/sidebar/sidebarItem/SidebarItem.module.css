@@ -4,13 +4,40 @@
     align-items: center;
     padding: 18px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 20px;
 }
 
 .item:hover {
     background-color: #595e63;
-    border-radius: 50px;
+    border-radius: 20px;
 }
 
 .icon {
     padding-right: 10px;
+}
+
+/* Если надписи (названия) содержатся в элементе с классом .name */
+.name {
+    transition: opacity 0.3s ease;
+}
+
+/* Медиа-запрос для экранов менее 768px */
+@media (max-width: 768px) {
+    .name {
+        display: none; /* или можно использовать opacity: 0; */
+    }
+    .item {
+        display: flex;
+        flex-direction: column; /* Размещаем иконки в столбик */
+        width: 50%;
+        padding: 20px;
+    }
+    .item:hover {
+        border-radius: 20px;
+    }
+    .icon{
+        font-size: 20px;
+        padding-right: 0;
+    }
 }

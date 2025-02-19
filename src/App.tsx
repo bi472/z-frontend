@@ -1,12 +1,12 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import TweetPage from './views/TweetPage/TweetPage';
-import LoginPage from './views/LoginPage/LoginPage';
-import RegisterPage from './views/RegisterPage/RegisterPage';
-import ProfilePage from './views/ProfilePage/ProfilePage';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Layout from './components/layouts/MainLayout';
-import Header from './components/header/Header';
-import NotificationsPage from './views/NotificationsPage/NotificationsPage';
 import BookmarksPage from './views/BookmarksPage/BookmarksPage';
+import LoginPage from './views/LoginPage/LoginPage';
+import NotificationsPage from './views/NotificationsPage/NotificationsPage';
+import ProfilePage from './views/ProfilePage/ProfilePage';
+import RegisterPage from './views/RegisterPage/RegisterPage';
+import SearchPage from './views/SearchPage/SearchPage';
+import TweetPage from './views/TweetPage/TweetPage';
 
 function App() {
     return (
@@ -52,6 +52,11 @@ function App() {
                         </Layout>
                     }
                 />
+                <Route path="/search" element={
+                        <Layout>
+                            <SearchPage />
+                        </Layout>} />
+                        
             </Routes>
         </Router>
     );

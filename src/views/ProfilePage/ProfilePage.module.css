@@ -17,12 +17,6 @@ h2 {
   gap: 20px;
 }
 
-.avatar {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-}
-
 .profileInfo {
   display: flex;
   flex-direction: column;
@@ -35,5 +29,13 @@ h2 {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 10px;
+}
+
+.biographyContainer {
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+  justify-content: center;
   gap: 10px;
 }
