@@ -1,90 +1,281 @@
 /* TweetPage.module.css */
 
 .tweetList {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .tweetItem {
-    margin-bottom: 20px;
-    border-bottom: white 1px solid;
-    padding: 15px; /* Increased padding for better spacing */
-    transition: transform 0.2s ease-in-out; /* Smooth transform on hover */
+  margin-bottom: 20px;
+  border-bottom: white 1px solid;
+  padding: 15px;
+  transition: transform 0.2s ease-in-out;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .tweetItem:hover {
-    transform: translateY(-3px); /* Slight raise effect on hover */
+  transform: translateY(-3px);
+}
+
+.tweetHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
 }
 
 .tweetAuthor {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
-    font-weight: bold;
-    color: white; /* Brand color for author name */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  font-weight: bold;
+  color: white;
+  min-width: 0; /* Prevents overflow */
 }
 
-.tweetDateCreated, .tweetDateUpdated {
-    font-size: 12px;
-    color: #777;
-    margin-top: 5px;
-    display: flex;
-    align-items: center;
+.username {
+  cursor: pointer;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+}
+
+.username:hover {
+  color: #1da1f2;
+  text-decoration: underline;
+}
+
+.tweetDateCreated,
+.tweetDateUpdated {
+  font-size: 12px;
+  color: #777;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
 }
 
 .tweetDateCreated::before {
-    content: '🕒'; /* Icon for creation date */
-    margin-right: 5px;
-    color: #007bff; /* Brand color */
+  content: "🕒"; /* Icon for creation date */
+  margin-right: 5px;
+  color: #007bff; /* Brand color */
 }
 
 .tweetDateUpdated::before {
-    content: '🔄'; /* Icon for update date */
-    margin-right: 5px;
-    color: #28a745; /* A green color to indicate updates */
+  content: "🔄"; /* Icon for update date */
+  margin-right: 5px;
+  color: #28a745; /* A green color to indicate updates */
 }
 
 .tweetContent {
-    font-size: 16px; /* Maintains readability */
-    color: white; /* Provides good contrast for readability */
-    padding: 10px; /* Ample padding for a good visual separation */
-    border-radius: 5px; /* Rounded corners for a softer look */
-    margin: 10px 0; /* Space between author/date and content */
-    line-height: 1.5; /* Enhanced line spacing for easier reading */
-    border: white 1px solid;
-    box-shadow: #777;
-    white-space: pre-wrap;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 16px; /* Maintains readability */
+  color: white; /* Provides good contrast for readability */
+  padding: 10px; /* Ample padding for a good visual separation */
+  border-radius: 5px; /* Rounded corners for a softer look */
+  margin: 10px 0; /* Space between author/date and content */
+  line-height: 1.5; /* Enhanced line spacing for easier reading */
+  border: white 1px solid;
+  box-shadow: #777;
+  white-space: pre-wrap;
+  width: 100%;
+  box-sizing: border-box;
+  word-break: break-word;
 }
 
-.actions{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding-top: 10px;
-    gap: 10px;
+.tweetImagesContainer {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 100%;
 }
 
-.actionIcon{
-    cursor: pointer;
+/* Single image layout */
+.tweetImagesContainer:has(.tweetImage:only-child) {
+  grid-template-columns: 1fr;
+  max-width: 100%;
 }
 
-.actionIcon:hover{
-    color: #9b9b9b;
+/* Two images layout */
+.tweetImagesContainer:has(.tweetImage:nth-child(2):last-child) {
+  grid-template-columns: 1fr 1fr;
 }
 
-.activeActionIcon{
-    color: #ff0008;
-    cursor: pointer;
+/* Three images layout */
+.tweetImagesContainer:has(.tweetImage:nth-child(3):last-child) {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
 }
 
-.activeActionIcon:hover{
-    color: #560104;
+.tweetImagesContainer:has(.tweetImage:nth-child(3):last-child) .tweetImage:first-child {
+  grid-row: 1 / 3;
 }
 
-.noTweets{
-    color: white;
-    text-align: center;
-    margin-top: 20px;
+/* Four images layout */
+.tweetImagesContainer:has(.tweetImage:nth-child(4):last-child) {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.tweetImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+}
+
+.tweetImage:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Single image special sizing */
+.tweetImagesContainer:has(.tweetImage:only-child) .tweetImage {
+  max-height: 400px;
+  height: auto;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 10px;
+  gap: 10px;
+}
+
+.actionIcon {
+  cursor: pointer;
+}
+
+.actionIcon:hover {
+  color: #9b9b9b;
+}
+
+.activeActionIcon {
+  color: #ff0008;
+  cursor: pointer;
+}
+
+.activeActionIcon:hover {
+  color: #560104;
+}
+
+.noTweets {
+  color: white;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Load more button styles */
+.loadMoreContainer {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.loadMoreButton {
+  background-color: #1da1f2;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.loadMoreButton:hover {
+  background-color: #1991db;
+}
+
+.loadMoreButton:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Media Queries for Responsive Design */
+@media screen and (max-width: 480px) {
+  .tweetHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .tweetAuthor {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  
+  .username {
+    max-width: 100%;
+  }
+  
+  .tweetContent {
+    padding: 8px;
+    font-size: 14px;
+  }
+  
+  .tweetImage {
+    height: 150px;
+  }
+  
+  .actions {
+    justify-content: space-around;
+  }
+  
+  /* Force single column for all image layouts on mobile */
+  .tweetImagesContainer {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+  }
+  
+  .tweetImagesContainer .tweetImage:first-child {
+    grid-row: auto !important;
+  }
+  
+  .followButton {
+    align-self: flex-start;
+    margin-top: 5px;
+  }
+}
+
+/* For tablets */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .tweetAuthor {
+    flex-wrap: wrap;
+  }
+  
+  .username {
+    max-width: 140px;
+  }
+  
+  /* Adjust image layouts for tablets */
+  .tweetImagesContainer:has(.tweetImage:nth-child(3):last-child),
+  .tweetImagesContainer:has(.tweetImage:nth-child(4):last-child) {
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: auto !important;
+  }
+  
+  .tweetImagesContainer:has(.tweetImage:nth-child(3):last-child) .tweetImage:first-child {
+    grid-row: auto !important;
+  }
 }

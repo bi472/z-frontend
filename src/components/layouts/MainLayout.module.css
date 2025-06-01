@@ -9,8 +9,9 @@
 
 .content{
     padding-top: 60px;
+    width: 100%;
+    box-sizing: border-box;
 }
-
 
 .rightSection{
     position: fixed;
@@ -24,11 +25,44 @@
     border-left: white 1px solid;
 }
 
-@media (max-width: 768px) {
+/* Tablets and medium-sized screens (up to 810px) */
+@media (max-width: 810px) {
     .layout {
-        grid-template-columns: 95px 1fr ;
+        grid-template-columns: 95px 1fr;
     }
     .rightSection{
         display: none;
+    }
+}
+
+/* Mobile devices (portrait) */
+@media (max-width: 480px) {
+    .layout {
+        display: flex;
+        flex-direction: column;
+        padding-left: 0;
+        margin-left: 0;
+    }
+    
+    .centerSection {
+        order: 2;
+        width: 100%;
+        padding-bottom: 70px; /* Space for bottom navigation */
+    }
+    
+    .content {
+        padding-top: 60px; /* Maintain padding for header on mobile */
+    }
+    
+    /* Add fixed bottom navigation instead of sidebar for mobile */
+    .mobileNav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #000;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        z-index: 100;
+        padding: 10px 0;
     }
 }

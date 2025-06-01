@@ -1,0 +1,325 @@
+.landingContainer {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: #e1e8ed;
+  background-color: #15202b;
+  line-height: 1.6;
+  max-width: 100%;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Header styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5%;
+  border-bottom: 1px solid #38444d;
+  background-color: #15202b;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1da1f2;
+  margin: 0;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.headerButtons {
+  display: flex;
+  gap: 1rem;
+}
+
+.loginButton, .registerButton {
+  padding: 0.6rem 1.2rem;
+  border-radius: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.loginButton {
+  border: 1px solid #1da1f2;
+  color: #1da1f2;
+  background-color: transparent;
+}
+
+.registerButton {
+  background-color: #1da1f2;
+  color: white;
+  border: 1px solid #1da1f2;
+}
+
+.loginButton:hover {
+  background-color: rgba(29, 161, 242, 0.1);
+}
+
+.registerButton:hover {
+  background-color: #1a91da;
+}
+
+/* Hero section */
+.hero {
+  display: flex;
+  padding: 5rem 5%;
+  gap: 2rem;
+  align-items: center;
+  background-color: #15202b;
+}
+
+.heroContent {
+  flex: 1;
+}
+
+.heroContent h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.heroContent p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  color: #8899a6;
+}
+
+.heroImage {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heroImage img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.ctaButton {
+  display: inline-block;
+  padding: 0.8rem 1.8rem;
+  background-color: #1da1f2;
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 30px;
+  transition: background-color 0.3s ease;
+}
+
+.ctaButton:hover {
+  background-color: #1a91da;
+}
+
+/* Features section */
+.features {
+  padding: 5rem 5%;
+  background-color: #192734;
+  text-align: center;
+}
+
+.features h2 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #fff;
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.featureCard {
+  padding: 2rem;
+  background-color: #22303c;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.featureCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.featureCard h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.featureCard p {
+  color: #8899a6;
+}
+
+/* CTA section */
+.cta {
+  padding: 5rem 5%;
+  background-color: #1da1f2;
+  text-align: center;
+  color: white;
+}
+
+.cta h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.cta p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta .ctaButton {
+  background-color: white;
+  color: #1da1f2;
+  font-size: 1.1rem;
+  padding: 1rem 2rem;
+}
+
+.cta .ctaButton:hover {
+  background-color: rgba(255,255,255,0.9);
+}
+
+/* Footer */
+.footer {
+  padding: 3rem 5%;
+  background-color: #192734;
+  color: #8899a6;
+}
+
+.footerLinks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footerColumn h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+}
+
+.footerColumn ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footerColumn li {
+  margin-bottom: 0.5rem;
+}
+
+.footerColumn a {
+  color: #8899a6;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footerColumn a:hover {
+  color: #1da1f2;
+}
+
+.copyright {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid #38444d;
+  color: #8899a6;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    padding: 3rem 5%;
+  }
+  
+  .heroContent h1 {
+    font-size: 2.5rem;
+  }
+  
+  .heroImage {
+    order: -1;
+    margin-bottom: 2rem;
+  }
+  
+  .features h2, .cta h2 {
+    font-size: 2rem;
+  }
+  
+  .headerActions {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 1rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .headerActions {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .headerButtons {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .logo h1 {
+    font-size: 1.2rem;
+  }
+  
+  .loginButton, .registerButton {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .heroContent h1 {
+    font-size: 2rem;
+  }
+  
+  .heroContent p {
+    font-size: 1rem;
+  }
+  
+  .features, .cta {
+    padding: 3rem 1rem;
+  }
+  
+  .features h2, .cta h2 {
+    font-size: 1.8rem;
+  }
+  
+  .cta p {
+    font-size: 1rem;
+  }
+}

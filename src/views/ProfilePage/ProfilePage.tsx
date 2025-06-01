@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { FaEdit } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import Avatar from '../../components/avatar/Avatar';
+import AvatarUpload from '../../components/avatar/AvatarUpload';
+import Button from '../../components/global/Button';
 import FollowButton from '../../components/global/FollowButton';
+import AddTweet from '../../components/tweet/AddTweet';
 import Tweets from '../../components/tweet/Tweets';
 import { Tweet } from '../../models/Tweet';
+import { User } from '../../models/User';
 import { FollowPresenter } from '../../presenters/FollowPresenter';
 import TweetPresenter from '../../presenters/TweetPresenter';
 import { UserPresenter } from '../../presenters/UserPresenter';
@@ -11,7 +17,7 @@ import { getUUIDFromToken } from '../../utils/getUUIDFromToken';
 import styles from './ProfilePage.module.css';
 
 const ProfilePage: React.FC = () => {
-
+    const { t } = useTranslation();
     const { identifier } = useParams<{ identifier: string }>();
     const [username, setUsername] = useState<string | null>(null);
     const [tweets, setTweets] = useState<Tweet[]>([]);
@@ -22,12 +28,11 @@ const ProfilePage: React.FC = () => {
     const [isEditingBio, setIsEditingBio] = useState<boolean>(false);
     const [editedBio, setEditedBio] = useState<string>('');
     const [isOwner, setIsOwner] = useState<boolean>(false);
+    const [user, setUser] = useState<User | null>(null);
 
     const userPresenter = new UserPresenter();
     const tweetPresenter = new TweetPresenter();
     const followPresenter = new FollowPresenter();
-
-    const bio_placeholder = "This user is so busy saving the world and eating pizza that they haven't found time to write a biography. But you can be sure they are a person with amazing talents and a great sense of humor.";
 
     useEffect(() => {
         const fetchUserAndTweets = async () => {
@@ -55,8 +60,9 @@ const ProfilePage: React.FC = () => {
             setEditedBio(fetchedUser.biography);
             setProfileUserUuid(fetchedUser.uuid);
             setIsOwner(fetchedUser.uuid === userUuid);
+            setUser(fetchedUser);
 
-            const fetchedTweets = await tweetPresenter.findByUsername(fetchedUsername);
+            const fetchedTweets = await tweetPresenter.findByUsername(fetchedUsername, 0, 10);
             setTweets(fetchedTweets);
 
             if (userUuid) {
@@ -67,12 +73,16 @@ const ProfilePage: React.FC = () => {
         };
 
         fetchUserAndTweets();
-    }, [identifier, userUuid]);
-
-    const loadTweets = () => {
+    }, [identifier, userUuid]);    const loadTweets = (offset = 0, limit = 10) => {
         if (username) {
-            tweetPresenter.findByUsername(username).then((loadedTweets) => {
-                setTweets(loadedTweets);
+            tweetPresenter.findByUsername(username, offset, limit).then((loadedTweets) => {
+                if (offset === 0) {
+                    // Reset tweets for initial load
+                    setTweets(loadedTweets);
+                } else {
+                    // Append tweets for pagination
+                    setTweets(prevTweets => [...prevTweets, ...loadedTweets]);
+                }
             });
         }
     };
@@ -112,44 +122,82 @@ const ProfilePage: React.FC = () => {
         setEditedBio(event.target.value);
     };
 
+    const handleAvatarChange = (avatarFile: { uuid: string; filename: string; path: string } | null) => {
+        if (user) {
+            // Update the user state with the new avatar file
+            const updatedUser = { ...user, avatarFile: avatarFile || undefined };
+            setUser(updatedUser);
+            
+            // Force a refresh of the user data from the server
+            if (username) {
+                userPresenter.findUserByUsername(username).then(freshUser => {
+                    setUser(freshUser);
+                });
+            }
+        }
+    };
+
     return (
-        <div className={styles.container}>
-            <div className={styles.header}>
-                <div className={styles.profileContainer}>
-                    <div className={styles.profileInfo}>
+        <div className={styles.container}>            
+        <div className={styles.header}>
+                <div className={styles.profileContainer}>                    
+                    <div className={styles.avatarSection}>
+                        {user && (
+                            <>
+                                {isOwner ? (
+                                    <AvatarUpload
+                                        currentAvatar={user.avatarFile || null}
+                                        onAvatarChange={handleAvatarChange}
+                                        isOwner={isOwner}
+                                    />
+                                ) : (
+                                    <Avatar
+                                        avatarFile={user.avatarFile}
+                                        username={user.username}
+                                        size="large"
+                                    />
+                                )}
+                            </>
+                        )}
+                    </div>
+                    <div className={styles.profileInfo}>                        
                         <div className={styles.usernameAndButton}>
-                            <h2>{username ? `${username}` : 'Loading...'}</h2>
-                            {username && (
+                            <h2>{username ? `${username}` : t('app.loading')}</h2>
+                            {username && !isOwner && (
                                 <FollowButton
                                     isFollowing={following}
                                     onClick={handleFollowClick}
                                 >
-                                    {following ? 'Unfollow' : 'Follow'}
+                                    {following ? t('tweet.unfollow') : t('tweet.follow')}
                                 </FollowButton>
                             )}
                         </div>
                         {isOwner ? (
                             isEditingBio ? (
-                                <div>
-                                    <textarea
+                                <div className={styles.biographyContainer}>                                    <textarea
                                         className={styles.biographyEdit}
                                         value={editedBio}
                                         onChange={handleBioChange}
+                                        placeholder={t('profile.bioPlaceholder')}
                                     />
-                                    <button onClick={handleSaveBioClick}>Save</button>
-                                </div>
-                            ) : (
+                                    <Button onClick={handleSaveBioClick}>{t('profile.saveBio')}</Button>
+                                </div>                            ) : (
                                 <div className={styles.biographyContainer}>
-                                    <p className={styles.biography}>{biography ? biography : bio_placeholder}</p>
+                                    <p className={styles.biography}>{biography ? biography : t('profile.bioPlaceholder')}</p>
                                     <FaEdit onClick={handleEditBioClick}>Edit</FaEdit>
                                 </div>
                             )
                         ) : (
-                            <p className={styles.biography}>{biography ? biography : bio_placeholder}</p>
-                        )}
+                            <p className={styles.biography}>{biography ? biography : t('profile.bioPlaceholder')}</p>)}
                     </div>
                 </div>
             </div>
+
+            {isOwner && (
+                <div className={styles.addTweetSection}>
+                    <AddTweet onTweetAdded={loadTweets} />
+                </div>
+            )}
 
             <div className={styles.tweetsList}>
                 <Tweets

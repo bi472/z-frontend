@@ -10,6 +10,8 @@
     justify-content: center;
     z-index: 1000;
     border-radius: 10px;
+    padding: 15px;
+    box-sizing: border-box;
 }
 
 p {
@@ -34,22 +36,140 @@ p {
 .modalContent {
     background: #2d2d2d;
     padding: 20px;
-    border-radius: 5px;
-    width: 500px;
+    border-radius: 10px;
+    width: 400px;
     max-width: 100%;
+    box-sizing: border-box;
 }
 
-.button{
-    background-color: #007bff;
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+}
+
+.modalHeader h3 {
+    color: white;
+    margin: 0;
+    font-size: 18px;
+}
+
+.closeButton {
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.closeButton:hover {
+    background-color: #444;
+    color: white;
+}
+
+.confirmText {
+    color: white;
+    margin: 0 0 20px 0;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.cancelButton {
+    background-color: transparent;
+    color: #999;
+    border: 1px solid #555;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cancelButton:hover {
+    background-color: #444;
+    color: white;
+}
+
+.deleteButton {
+    background-color: #f91880;
     color: white;
     border: none;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.deleteButton:hover {
+    background-color: #e1176f;
 }
 
 .modalActions {
     display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Mobile styles */
+@media (max-width: 480px) {
+    .modal {
+        align-items: flex-end;
+        padding: 0;
+    }
+    
+    .modalContent {
+        width: 100%;
+        border-radius: 10px 10px 0 0;
+        padding: 16px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .modalHeader {
+        margin-bottom: 15px;
+        padding-bottom: 8px;
+    }
+    
+    .confirmText {
+        font-size: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .modalActions {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .cancelButton, 
+    .deleteButton {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        text-align: center;
+    }
+    
+    /* Reverse order for mobile to put primary action at bottom */
+    .modalActions {
+        flex-direction: column-reverse;
+    }
+}
+
+/* Tablets */
+@media (min-width: 481px) and (max-width: 768px) {
+    .modalContent {
+        width: 90%;
+        max-width: 450px;
+    }
 }

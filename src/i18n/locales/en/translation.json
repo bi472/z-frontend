@@ -1,0 +1,129 @@
+{
+  "auth": {
+    "username": "Username",
+    "password": "Password",
+    "email": "Email",
+    "login": "Login",
+    "register": "Register",
+    "error": "Authentication error",
+    "logout": "Logout",
+    "signup": "Sign Up",
+    "logoutSuccess": "Logout successful",
+    "loginExpired": "Your login has expired. Please sign in again.",
+    "registerLink": "Don't have an account? Sign up",
+    "loginSuccess": "Login successful",
+    "invalidCredentials": "Invalid username or password",
+    "usernameExists": "Username already exists",
+    "registerSuccess": "Registration successful"
+  },
+  "header": {
+    "forYou": "For You",
+    "following": "Following"
+  },
+  "sidebar": {
+    "home": "Home",
+    "explore": "Explore",
+    "notifications": "Notifications",
+    "messages": "Messages",
+    "bookmarks": "Bookmarks",
+    "profile": "Profile",
+    "more": "More"
+  },
+  "navigation": {
+    "home": "Home",
+    "notifications": "Notifications",
+    "bookmarks": "Bookmarks",
+    "profile": "Profile"
+  },
+  "tweet": {
+    "whatsHappening": "What's happening?",
+    "tweet": "Tweet",
+    "like": "Like",
+    "unlike": "Unlike",
+    "reply": "Reply",
+    "retweet": "Retweet",
+    "share": "Share",
+    "imageLimit": "images max",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirmDelete": "Are you sure you want to delete this tweet?",
+    "editTweet": "Edit Tweet",
+    "save": "Save",
+    "cancel": "Cancel",
+    "tweetBy": "Tweet by",
+    "noTweets": "No tweets yet",
+    "follow": "Follow",
+    "unfollow": "Unfollow",
+    "created": "Created",
+    "updated": "Updated",
+    "loading": "Loading...",
+    "loadMore": "Load more",
+    "addTweet": "Add Tweet",
+    "addSuccess": "Tweet added successfully"
+  },
+  "modal": {
+    "updateError": "Failed to update tweet",
+    "deleteError": "Failed to delete tweet"
+  },
+  "profile": {
+    "joined": "Joined",
+    "followers": "Followers",
+    "following": "Following",
+    "follow": "Follow",
+    "unfollow": "Unfollow",
+    "edit": "Edit profile",
+    "tweets": "Tweets",
+    "replies": "Replies",
+    "media": "Media",
+    "likes": "Likes"
+  },
+  "search": {
+    "placeholder": "Search Z Social",
+    "people": "People",
+    "tweets": "Tweets",
+    "noResults": "No results found.",
+    "searchUsers": "Search users"
+  },
+  "language": {
+    "switchLanguage": "Switch language"
+  },
+  "notifications": {
+    "newFollower": "started following you",
+    "likedTweet": "liked your tweet",
+    "retweeted": "retweeted your tweet",
+    "mentioned": "mentioned you in a tweet",
+    "replied": "replied to your tweet",
+    "empty": "No notifications yet",
+    "all": "All",
+    "read": "Read",
+    "unread": "Unread",
+    "filterLabel": "Filter notifications",
+    "markAllAsRead": "Mark all as read"
+  },
+  "landing": {
+    "heroTitle": "Connect with the World",
+    "heroSubtitle": "Join the conversation, share your thoughts, and discover what's happening right now.",
+    "getStarted": "Get Started",
+    "featuresTitle": "Why Choose Z Social?",
+    "feature1Title": "Real-Time Connections",
+    "feature1Desc": "Stay connected with friends, family, and the world with instant updates and real-time conversations.",
+    "feature2Title": "Express Yourself",
+    "feature2Desc": "Share your thoughts, photos, and stories with a global community that appreciates your unique voice.",
+    "feature3Title": "Discover What Matters",
+    "feature3Desc": "Find trending topics, breaking news, and conversations that align with your interests and passions.",
+    "feature4Title": "Privacy Control",
+    "feature4Desc": "You're in control of your experience with robust privacy settings and content moderation tools.",
+    "ctaTitle": "Ready to Join?",
+    "ctaText": "Create your account today and start connecting with millions of users worldwide. It only takes a minute to get started!",
+    "joinNow": "Join Now"
+  },
+  "footer": {
+    "copyright": "All Rights Reserved"
+  },
+  "bookmarks": {
+    "title": "Bookmarks",
+    "empty": "You haven't bookmarked any Tweets yet",
+    "removeAll": "Remove all bookmarks",
+    "confirmRemoveAll": "Are you sure you want to remove all bookmarks?"
+  }
+}

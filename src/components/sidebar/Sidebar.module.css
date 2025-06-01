@@ -1,81 +1,161 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    width: 275px;
-    height: 100%;
-    border-right: white 1px solid;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  width: 275px;
+  height: 100%;
+  border-right: white 1px solid;
+  z-index: 10;
+  background-color: #000; /* Ensure the sidebar has a background */
 }
 
 .logo {
-    height: 70px;
-    align-self: center;
+  height: 70px;
+  align-self: center;
 }
 
 .sidebar {
-    margin-left: 20px;
-    padding-top: 20px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Выравнивание элементов по левому краю */
-    justify-content: center; /* Центрирование элементов по вертикали */
-    height: 50vh; /* Для демонстрации можете задать высоту контейнера */
-    font-weight: bold;
+  margin-left: 20px;
+  padding-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Выравнивание элементов по левому краю */
+  justify-content: center; /* Центрирование элементов по вертикали */
+  height: 50vh;
+  font-weight: bold;
 }
 
-.authButtons{
-    display: flex;
-    justify-content: center;
+.authButtons {
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
 }
 
-.loginAndSignUpButtons{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.loginAndSignUpButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .searchIcon {
-    width: fit-content;
-    display: none;
-    align-items: center;
-    padding: 18px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    border-radius: 20px;
+  width: fit-content;
+  display: none;
+  align-items: center;
+  padding: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 20px;
 }
 
 .searchIcon:hover {
-    background-color: #595e63;
-    border-radius: 50px;
+  background-color: #595e63;
+  border-radius: 50px;
 }
 
+.languageSection {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+}
 
-/* Медиа-запрос для экранов менее 768px */
-@media (max-width: 768px) {
-    .container {
-        width: 95px; /* уменьшаем ширину панели */
-    }
-    .sidebar {    
-        margin-left: 0px;
-        padding-top: 0px;
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* Центрируем элементы по горизонтали */
-        justify-content: center; /* Центрируем элементы по вертикали */
-    }
-    .searchIcon {
-        display: flex;
-        flex-direction: column; /* Размещаем иконки в столбик */
-        width: 50%;
-        padding: 20px;
-    }
-    .searchIcon:hover {
-        border-radius: 20px;
-    }
-    .icon{
-        font-size: 20px;
-        padding-right: 0;
-    }
+/* Only hide language section on mobile */
+@media (max-width: 480px) {
+  .languageSection {
+    display: none; /* Hide on mobile since we moved it to header */
+  }
+}
+
+/* Ensure it's visible on tablets/medium screens */
+@media (min-width: 481px) and (max-width: 810px) {
+  .languageSection {
+    display: flex;
+  }
+}
+
+/* Tablet styles */
+@media (max-width: 810px) {
+  .container {
+    width: 95px;
+  }
+  .sidebar {
+    margin-left: 0px;
+    padding-top: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .searchIcon {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding: 20px;
+  }
+  .searchIcon:hover {
+    border-radius: 20px;
+  }
+  .icon {
+    font-size: 20px;
+    padding-right: 0;
+  }
+  .loginAndSignUpButtons {
+    width: 75%;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 480px) {
+  .container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px 0;
+    z-index: 100;
+  }
+  
+  .logo {
+    display: none;
+  }
+  
+  .sidebar {
+    flex-direction: row;
+    justify-content: space-around;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  
+  .authButtons {
+    display: none; /* Hide auth buttons on mobile, they can be moved to a profile page */
+  }
+  
+  .languageSection {
+    display: none; /* Hide language switcher on mobile, can be moved to settings */
+  }
+  
+  /* Show only icons in mobile navigation, hide text */
+  .sidebarText {
+    display: none;
+  }
+  
+  .searchIcon {
+    display: flex;
+    padding: 10px;
+    width: auto;
+  }
+  
+  /* Make icons smaller on mobile */
+  .icon {
+    font-size: 24px;
+  }
 }

@@ -1,5 +1,6 @@
 import { NotificationType } from '../types/NotificationTypeEnum';
 import { User } from './User';
+import { Tweet } from './Tweet';
 
 export interface Notification {
     uuid: string;
@@ -7,5 +8,8 @@ export interface Notification {
     read: boolean;
     user: User;
     createdBy: User;
-    tweetUuid: string;
+    tweet?: Tweet;
+    tweetUuid?: string;
+    createdAt: Date;
+    updatedAt: Date;
 }

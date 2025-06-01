@@ -1,30 +1,238 @@
 /* AddTweet.css */
 .tweetFormContainer {
-    padding: 10px;
-    margin: 0 0 24px;
-    padding: 20px;
-    border-bottom: white 1px solid;
+  padding: 20px;
+  margin: 0 0 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .tweetForm {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
 }
 
 .inputTweet {
-    color: white;
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  background-color: transparent;
+  resize: vertical;
+  white-space: pre-wrap;
+  min-height: 80px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.inputTweet:focus {
+  border: none;
+  box-shadow: none;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.imageUploadContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.imageUploadLabel {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #1da1f2;
+  padding: 0;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  transition: background 0.2s;
+}
+
+.imageUploadLabel:hover {
+  background: rgba(29, 161, 242, 0.1);
+}
+
+.imageInput {
+  display: none;
+}
+
+.imagesContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  max-width: 100%;
+  justify-items: center;
+  width: 100%;
+}
+
+.imagePreviewContainer {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+  max-width: 200px;
+}
+
+.imagePreview {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  display: block;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.imagePreview:hover {
+  opacity: 0.8;
+}
+
+.removeImageBtn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.removeImageBtn:hover {
+  background-color: rgba(220, 53, 69, 0.8);
+}
+
+.imageCount {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  margin-left: 8px;
+}
+
+.imagePreviewClickable {
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.imagePreviewClickable:hover {
+  opacity: 0.8;
+}
+
+.tweetButton {
+  background: #1da1f2;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: auto;
+  min-width: 100px;
+}
+
+.tweetButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tweetFormContainer,
+.tweetsList {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Media Queries for Responsive Design */
+@media screen and (max-width: 480px) {
+  .tweetFormContainer {
+    padding: 15px 10px;
+  }
+  
+  .buttonContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .imageUploadContainer {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .tweetButton {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .inputTweet {
+    font-size: 14px;
     padding: 10px;
-    margin-bottom: 16px;
-    border: none;
-    outline: none;
-    background-color: transparent;
-    resize: vertical; /* Позволяет изменять размер textarea вертикально */
-    white-space: pre-wrap; /* Сохраняет пробелы и переносы строк */
+  }
+  
+  .imagesContainer {
+    grid-template-columns: 1fr;
+  }
+  
+  .imagePreviewContainer {
+    max-width: 100%;
+  }
 }
 
-.buttonContainer{
-    display: flex;
-    justify-content: flex-end;
+/* For tablets */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .buttonContainer {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .imageUploadContainer {
+    flex: 1;
+    justify-content: flex-start;
+  }
+  
+  .imagesContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-
+/* Additional styles for better mobile experience */
+@media screen and (max-width: 768px) {
+  .imagePreview {
+    height: 100px;
+  }
+  
+  .removeImageBtn {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+  }
+}

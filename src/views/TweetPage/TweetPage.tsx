@@ -8,11 +8,8 @@ import { UserPresenter } from '../../presenters/UserPresenter';
 import { getUUIDFromToken } from '../../utils/getUUIDFromToken';
 
 const TweetPage: React.FC = () => {
-
     const tweetPresenter = new TweetPresenter();
-    const userPresenter = new UserPresenter();
     const [tweets, setTweets] = useState<Tweet[]>([]);
-    const [tweetImages, setTweetImages] = useState<{ [key: string]: string | null }>({});
     const userUuid = getUUIDFromToken()
 
     useEffect(() => {

@@ -3,10 +3,15 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 h2 {
   text-align: center;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .profileContainer {
@@ -15,6 +20,7 @@ h2 {
   align-items: center;
   flex-direction: row;
   gap: 20px;
+  width: 100%;
 }
 
 .profileInfo {
@@ -22,20 +28,180 @@ h2 {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+  flex: 1;
+  min-width: 0; /* Prevents flex items from overflowing */
 }
 
 .usernameAndButton {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 10px;
+  width: 100%;
+  flex-wrap: wrap;
 }
 
 .biographyContainer {
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 10px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.biographyEdit {
+  color: white;
+  padding: 10px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  outline: none;
+  background-color: rgba(0, 0, 0, 0.2);
+  resize: vertical;
+  width: 100%;
+  min-height: 80px;
+  max-height: 200px;
+  font-size: 14px;
+}
+
+.biography {
+  margin: 0;
+  padding: 10px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.8);
+  word-wrap: break-word;
+  width: 100%;
+}
+
+.avatarContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatarSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-width: 100px;
+}
+
+.addTweetSection {
+  width: 100%;
+  margin: 20px auto;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+
+.tweetsList {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+/* Media Queries for Responsive Design */
+
+/* Mobile devices (portrait) */
+@media screen and (max-width: 480px) {
+  .profileContainer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+  }
+  
+  .profileInfo {
+    align-items: center;
+  }
+  
+  .usernameAndButton {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .biographyContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .header {
+    padding: 15px 10px;
+  }
+  
+  .container {
+    padding: 0 10px;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  .biography {
+    text-align: center;
+    font-size: 13px;
+  }
+}
+
+/* Tablets and small laptops */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .profileContainer {
+    gap: 15px;
+  }
+  
+  .usernameAndButton {
+    flex-wrap: wrap;
+  }
+  
+  .container {
+    padding: 0 15px;
+  }
+  
+  h2 {
+    font-size: 1.7rem;
+  }
+}
+
+/* Medium-sized screens */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    max-width: 900px;
+  }
+}
+
+/* Extra styles for better appearance */
+.biographyContainer svg {
+  cursor: pointer;
+  color: #1da1f2;
+  font-size: 20px;
+  transition: color 0.2s ease;
+}
+
+.biographyContainer svg:hover {
+  color: #0d8ecf;
+}
+
+.usernameAndButton h2 {
+  font-weight: bold;
+  color: white;
+  font-size: 1.8rem;
 }

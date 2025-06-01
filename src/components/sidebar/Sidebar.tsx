@@ -1,72 +1,83 @@
+import React, { useEffect, useState } from 'react';
 import { FaBell, FaBookmark, FaHome, FaSearch, FaUser } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 import { UserPresenter } from "../../presenters/UserPresenter";
 import { isLoggedIn } from "../../utils/loginCheck";
 import Button from "../global/Button";
+import LanguageSwitcher from "../global/LanguageSwitcher";
 import styles from "./Sidebar.module.css";
 import SidebarItem from "./sidebarItem/SidebarItem";
 
+const Sidebar: React.FC = () => {
+    const { t, i18n } = useTranslation();
+    const userPresenter = new UserPresenter();
+    const navigate = useNavigate();
+    const [currentLanguage, setCurrentLanguage] = useState(i18n.language || 'en');
 
-const Sidebar = () => {
-
-    const userPresenter = new UserPresenter()
+    // Keep track of language changes
+    useEffect(() => {
+        setCurrentLanguage(i18n.language);
+    }, [i18n.language]);
 
     const handleSearch = () => {
-        window.location.href = '/search'; // Переход на страницу поиска
+        navigate('/search');
     };
 
     const handleHome = () => {
-        window.location.href = '/'
+        navigate('/');
     };
 
     const handleNotifications = () => {
-        window.location.href = '/notifications'
+        navigate('/notifications');
     };
 
     const handleBookmarks = () => {
-        window.location.href = '/bookmarks'
+        navigate('/bookmarks');
     };
 
     const handleProfile = () => {
         userPresenter.me().then((user) => {
-            window.location.href = `/profile/${user.username}`
+            navigate(`/profile/${user.username}`);
         }).catch((error) => {
-            console.log(error)
-            alert('An error occurred')
-        })
+            console.log(error);
+            alert(t('auth.error'));
+        });
     };
     
     const handleLogout = () => {
         userPresenter.logout()
             .then(() => {
-                alert('You have been logged out!');
-                window.location.href = '/';
+                alert(t('auth.logoutSuccess'));
+                navigate('/');
             })
-            .catch(
-                (error) => {
-                    console.log(error)
-                    alert('Your login session is expired you will be redirected to login page.')
-                    window.location.href = '/login'
+            .catch((error) => {
+                console.log(error);
+                alert(t('auth.loginExpired'));
+                navigate('/login');
             });
-
     };
 
     const handleLogin = () => {
-        window.location.href = '/login'
-    }
+        navigate('/login');
+    };
 
     const handleSignUp = () => {
-        window.location.href = '/register'
-    }
+        navigate('/register');
+    };
 
-    const sidebarItems = [
-        { name: 'Home', icon: FaHome, onClick: handleHome },
+    // Dynamic sidebar items that update when language changes
+    const getSidebarItems = () => [
+        { name: t('sidebar.home'), icon: FaHome, onClick: handleHome },
         ...(isLoggedIn() ? [
-            { name: 'Notifications', icon: FaBell, onClick: handleNotifications },
-            { name: 'Bookmarks', icon: FaBookmark, onClick: handleBookmarks },
-            { name: 'Profile', icon: FaUser, onClick: handleProfile }
+            { name: t('sidebar.notifications'), icon: FaBell, onClick: handleNotifications },
+            { name: t('sidebar.bookmarks'), icon: FaBookmark, onClick: handleBookmarks },
+            { name: t('sidebar.profile'), icon: FaUser, onClick: handleProfile }
         ] : [])
     ];
+
+    const sidebarItems = getSidebarItems();
 
     return (
         <div className={styles.container}>
@@ -75,28 +86,31 @@ const Sidebar = () => {
             </div>
             <div className={styles.sidebar}>
                 {sidebarItems.map((item, index) => (
-                    <SidebarItem key={index} name={item.name} icon={item.icon} onClick={item.onClick}/>
+                    <SidebarItem key={`${index}-${currentLanguage}`} name={item.name} icon={item.icon} onClick={item.onClick}/>
                 ))}
                 <div className={styles.searchIcon} onClick={handleSearch}>
                     <FaSearch className={styles.icon}/>
                 </div>
             </div>
+            <div className={styles.languageSection}>
+                <LanguageSwitcher />
+            </div>
             <div className={styles.authButtons}>
-                    {isLoggedIn() ? 
-                        <Button onClick={handleLogout}>
-                            Logout
+                {isLoggedIn() ? 
+                    <Button onClick={handleLogout}>
+                        {t('auth.logout')}
+                    </Button>
+                    :
+                    <div className={styles.loginAndSignUpButtons}>
+                        <Button onClick={handleLogin}>
+                            {t('auth.login')}
                         </Button>
-                        :
-                        <div className={styles.loginAndSignUpButtons}>
-                            <Button onClick={handleLogin}>
-                                Login
-                            </Button>
-                            <Button onClick={handleSignUp}>
-                                Sign Up
-                            </Button>
-                        </div>
-                        }
-                </div>
+                        <Button onClick={handleSignUp}>
+                            {t('auth.signup')}
+                        </Button>
+                    </div>
+                }
+            </div>
         </div>
     );
 };

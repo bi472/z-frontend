@@ -15,6 +15,7 @@
 
 .icon {
     padding-right: 10px;
+    font-size: 20px;
 }
 
 /* Если надписи (названия) содержатся в элементе с классом .name */
@@ -22,8 +23,8 @@
     transition: opacity 0.3s ease;
 }
 
-/* Медиа-запрос для экранов менее 768px */
-@media (max-width: 768px) {
+/* Tablet displays */
+@media (max-width: 810px) {
     .name {
         display: none; /* или можно использовать opacity: 0; */
     }
@@ -39,5 +40,46 @@
     .icon{
         font-size: 20px;
         padding-right: 0;
+    }
+}
+
+/* Mobile devices */
+@media (max-width: 480px) {
+    .item {
+        flex-direction: column;
+        width: auto;
+        padding: 10px;
+        margin: 0;
+        border-radius: 0;
+    }
+    
+    .item:hover {
+        background-color: transparent;
+        border-radius: 0;
+    }
+    
+    .item:active {
+        opacity: 0.7;
+    }
+    
+    .icon {
+        font-size: 22px;
+        padding: 0;
+    }
+    
+    /* Add active state indication */
+    .active {
+        color: #1da1f2;
+    }
+    
+    /* Small indicator dot for active item */
+    .item.active::after {
+        content: '';
+        display: block;
+        width: 4px;
+        height: 4px;
+        background-color: #1da1f2;
+        border-radius: 50%;
+        margin-top: 4px;
     }
 }

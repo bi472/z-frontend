@@ -1,0 +1,59 @@
+.languageSwitcher {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.languageSwitcher:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #1da1f2;
+    transform: translateY(-1px);
+}
+
+.icon {
+    font-size: 16px;
+    color: #1da1f2;
+}
+
+.language {
+    min-width: 20px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .languageSwitcher {
+        padding: 6px 8px;
+        font-size: 12px;
+    }
+    
+    .icon {
+        font-size: 14px;
+    }
+}
+
+/* Mobile styles */
+@media (max-width: 480px) {
+    .languageSwitcher {
+        padding: 4px 6px;
+        font-size: 11px;
+        background: rgba(255, 255, 255, 0.15);
+        border: none;
+    }
+    
+    .icon {
+        font-size: 12px;
+    }
+    
+    .language {
+        min-width: 16px;
+    }
+}

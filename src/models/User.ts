@@ -5,6 +5,7 @@ export interface User{
     username: string;
     biography: string;
     password: string;
+    avatarFile?: { uuid: string; filename: string; path: string };
     tweets: Tweet[];
     likedTweets: Tweet[];
     bookmarkedTweets: Tweet[];
